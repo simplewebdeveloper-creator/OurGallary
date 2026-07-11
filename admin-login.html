@@ -23,7 +23,8 @@
   <body class="min-h-full bg-[radial-gradient(circle_at_top_left,_rgba(236,72,153,0.18),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.14),_transparent_22%),linear-gradient(135deg,_#050816_0%,_#081029_45%,_#111827_100%)] text-slate-100">
     <div class="mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-6 sm:px-6 lg:px-8">
       <header class="flex items-center justify-between rounded-full border border-white/10 bg-slate-950/60 px-4 py-3 glass">
-        <a href="index.html" class="flex items-center gap-3 text-sm font-semibold text-white">
+        <!-- Fixed broken link tag here -->
+        <a href="index.html" class="flex items-center gap-3 text-sm font-semibold text-white">Atelier Gallery</a>
         <a href="auth.html?mode=login" class="rounded-full border border-white/10 bg-white/10 px-3 py-2 text-sm text-slate-100">User Login</a>
       </header>
 
@@ -36,11 +37,13 @@
           <form id="adminLoginForm" class="mt-6 space-y-4">
             <div>
               <label class="mb-2 block text-sm text-slate-300" for="adminUsername">Username</label>
-              <input id="adminUsername" class="w-full rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" placeholder="" required />
+              <!-- Added name="username" -->
+              <input id="adminUsername" name="username" class="w-full rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" placeholder="" required />
             </div>
             <div>
               <label class="mb-2 block text-sm text-slate-300" for="adminPassword">Password</label>
-              <input id="adminPassword" type="password" class="w-full rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" placeholder="" required />
+              <!-- Added name="password" -->
+              <input id="adminPassword" name="password" type="password" class="w-full rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" placeholder="" required />
             </div>
             <button type="submit" class="w-full rounded-2xl bg-gradient-to-r from-brand-600 to-cyan-400 px-4 py-3 text-sm font-semibold text-white transition hover:scale-[1.01]">Sign in as admin</button>
           </form>
