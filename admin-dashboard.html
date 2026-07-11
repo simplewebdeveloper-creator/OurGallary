@@ -66,9 +66,10 @@
                   <option value="video">Video</option>
                 </select>
               </div>
+              <!-- Changed type="file" selector to clean text type layout to take link strings directly -->
               <div class="mt-4">
-                <label class="mb-2 block text-sm text-slate-300" for="adminFile">Choose photo or video from device</label>
-                <input id="adminFile" type="file" accept="image/*,video/*" class="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white file:mr-3 file:rounded-full file:border-0 file:bg-brand-600 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-white" />
+                <label class="mb-2 block text-sm text-slate-300" for="adminFile">Image or Video URL Link</label>
+                <input id="adminFile" type="text" class="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" placeholder="https://unsplash.com... or https://imgur.com..." />
               </div>
               <div class="mt-4">
                 <label class="mb-2 block text-sm text-slate-300" for="adminDescription">Description</label>
