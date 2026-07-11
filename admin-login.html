@@ -52,6 +52,44 @@
       </main>
     </div>
 
-    <script src="js/app.js"></script>
+    <script>
+  document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const usernameInput = document.getElementById('adminUsername').value;
+    const passwordInput = document.getElementById('adminPassword').value;
+    const messageElement = document.getElementById('adminLoginMessage');
+    
+    messageElement.textContent = "Logging in...";
+    messageElement.className = "mt-4 text-sm text-cyan-400";
+
+    try {
+      const response = await fetch('/api/admin-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: usernameInput, password: passwordInput })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        messageElement.textContent = "Success! Redirecting...";
+        messageElement.className = "mt-4 text-sm text-green-400";
+        // Redirect directly to your admin dashboard file
+        setTimeout(() => {
+          window.location.href = 'admin-dashboard.html';
+        }, 1000);
+      } else {
+        messageElement.textContent = data.error || "Invalid admin credentials.";
+        messageElement.className = "mt-4 text-sm text-red-400";
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      messageElement.textContent = "Could not connect to server.";
+      messageElement.className = "mt-4 text-sm text-red-400";
+    }
+  });
+</script>
+
   </body>
 </html>
