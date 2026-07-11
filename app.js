@@ -21,7 +21,7 @@ function pushNotification(message, type = 'info') {
   if (!target) return;
   const tone = type === 'error' ? 'border-rose-500/30 text-rose-300' : 'border-emerald-500/30 text-emerald-300';
   const item = document.createElement('div');
-  item.className = `rounded-2xl border bg-white/5 p-3 ${tone}`;
+  item.className = `rounded-2xl border bg-slate-900 p-4 shadow-xl ${tone}`;
   item.textContent = message;
   target.prepend(item);
   setTimeout(() => item.remove(), 4200);
@@ -67,9 +67,11 @@ async function initializeAuth() {
 
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
+    
+    // REPAIRED: Fully restored the broken cut-off inputs section
     const name = document.getElementById('name')?.value.trim() || '';
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('email')?.value.trim() || '';
+    const password = document.getElementById('password')?.value || '';
     const confirmPassword = document.getElementById('confirmPassword')?.value || '';
 
     if (!email || !password) {
@@ -124,7 +126,7 @@ async function initializeAdminLogin() {
   const message = document.getElementById('adminLoginMessage');
 
   if (location.protocol === 'file:') {
-    if (message) message.textContent = 'This page must be opened through the backend server (e.g. http://localhost:3000/admin-login.html). Start the server and open that URL.';
+    if (message) message.textContent = 'This page must be opened through the backend server.';
     return;
   }
 
@@ -145,8 +147,7 @@ async function initializeAdminLogin() {
       });
       window.location.href = 'admin-dashboard.html';
     } catch (error) {
-      const errMsg = error.message && error.message.toLowerCase().includes('failed') ? 'Unable to reach backend. Start the server and open this page via http://localhost:3000/admin-login.html' : error.message;
-      if (message) message.textContent = errMsg;
+      if (message) message.textContent = error.message;
     }
   });
 }
@@ -260,22 +261,28 @@ async function initializeAdminDashboard() {
       return;
     }
 
-    let finalImageUrl = "";
-    
-    if (fileInput && fileInput.files && fileInput.files.length > 0) {
-      const file = fileInput.files[0];
-      finalImageUrl = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
-      });
-    } else if (fileInput && fileInput.value) {
-      finalImageUrl = fileInput.value.trim();
-    }
+    // Safely reads the pasted image link text field directly 
+    const finalImageUrl = fileInput ? fileInput.value.trim() : "";
 
     if (!finalImageUrl) {
-      pushNotification('Please select a file or provide an image link.', 'error');
+      pushNotification('Please provide a valid image or video link.', 'error');
       return;
     }
 
+    try {
+      await apiRequest('/api/gallery/upload', {
+        method: 'POST',
+        body: JSON.stringify({ title, type, description, image: finalImageUrl })
+      });
+      pushNotification('Item uploaded successfully!', 'success');
+      if (titleInput) titleInput.value = '';
+      if (fileInput) fileInput.value = '';
+      if (descriptionInput) descriptionInput.value = '';
+      await refreshGallery();
+    } catch (err) {
+      pushNotification(err.message, 'error');
+    }
+  });
+
+  logoutButton?.addEventListener('click', async () => {
+    try {await apiRequest('/api/logout', { method: 'POST' });window.location.href = 'index.html';} catch (err) {pushNotification('Logout failed', 'error');}});await refreshGallery();}document.addEventListener('DOMContentLoaded', () => {if (document.getElementById('authForm')) initializeAuth();if (document.getElementById('adminLoginForm')) initializeAdminLogin();if (document.getElementById('adminGalleryGrid')) initializeAdminDashboard();const indexContainer = document.getElementById('galleryGrid');if (indexContainer) {loadGallery().then(items => renderGalleryItems(items, indexContainer)).catch(() => {});}});
