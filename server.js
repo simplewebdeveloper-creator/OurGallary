@@ -1,4 +1,4 @@
-require('dotenv').config(); // 1. Added dotenv config at the absolute top
+require('dotenv').config();
 
 const express = require('express');
 const session = require('express-session');
@@ -9,7 +9,6 @@ const path = require('path');
 
 const app = express();
 
-// 2. Instruct Express to trust Render's reverse proxy structure for cookies
 app.set('trust proxy', 1);
 
 app.use('/css', express.static('css'));
@@ -71,7 +70,7 @@ async function ensureData() {
         title: 'Editorial Set',
         category: 'Editorial',
         description: 'A curated collection with cinematic lighting.',
-        image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80',
+        image: 'https://unsplash.com',
         type: 'image',
         createdAt: Date.now() - 1000 * 60 * 60 * 24 * 2
       },
@@ -80,7 +79,7 @@ async function ensureData() {
         title: 'Travel Notes',
         category: 'Travel',
         description: 'Warm tones and wide-open landscapes.',
-        image: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=900&q=80',
+        image: 'https://unsplash.com',
         type: 'image',
         createdAt: Date.now() - 1000 * 60 * 60 * 24 * 5
       },
@@ -89,7 +88,7 @@ async function ensureData() {
         title: 'Studio Portraits',
         category: 'Portraits',
         description: 'Thoughtful framing with intentional contrast.',
-        image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80',
+        image: 'https://unsplash.com',
         type: 'image',
         createdAt: Date.now() - 1000 * 60 * 60 * 24 * 8
       }
@@ -127,8 +126,11 @@ function adminRequired(req, res, next) {
 }
 
 app.use(helmet());
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: false }));
+
+// FIXED: Increased the allowable text upload sizes from 10mb to 50mb so large files do not crash the pipeline
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: false }));
+
 app.use(
   session({
     name: 'atelier.sid',
@@ -292,7 +294,6 @@ app.post('/api/gallery/delete', adminRequired, (req, res) => {
   return res.json({ success: true });
 });
 
-// 3. Completed the cutoff profile endpoint route and initialized server files
 app.get('/api/profile', authRequired, (req, res) => {
   const user = findUserById(req.session.user.id);
   if (!user) {
