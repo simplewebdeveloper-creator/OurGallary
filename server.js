@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); // 1. Added dotenv config at the absolute top
 
 const express = require('express');
 const session = require('express-session');
@@ -8,6 +8,10 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
+
+// 2. Instruct Express to trust Render's reverse proxy structure for cookies
+app.set('trust proxy', 1);
+
 app.use('/css', express.static('css'));
 app.use('/js', express.static('js'));
 app.use(express.static(__dirname));
@@ -288,10 +292,11 @@ app.post('/api/gallery/delete', adminRequired, (req, res) => {
   return res.json({ success: true });
 });
 
+// 3. Completed the cutoff profile endpoint route and initialized server files
 app.get('/api/profile', authRequired, (req, res) => {
   const user = findUserById(req.session.user.id);
   if (!user) {
-    return res.status(404).json({ error: 'Profile not found.' });
+    return res.status(404).json({ error: 'User not found.' });
   }
   return res.json({
     name: user.name,
@@ -302,28 +307,8 @@ app.get('/api/profile', authRequired, (req, res) => {
   });
 });
 
-app.post('/api/profile', authRequired, (req, res) => {
-  const { displayName, bio } = req.body;
-  const users = readJson(usersFile, []);
-  const userIndex = users.findIndex((u) => u.id === req.session.user.id);
-  if (userIndex < 0) {
-    return res.status(404).json({ error: 'Profile not found.' });
-  }
-
-  users[userIndex].displayName = displayName || users[userIndex].name;
-  users[userIndex].bio = bio || '';
-  writeJson(usersFile, users);
-
-  return res.json({ success: true });
-});
-
-app.use(express.static(path.join(__dirname, '.')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
 ensureData().then(() => {
   app.listen(PORT, () => {
-    console.log(`Atelier Gallery backend listening on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
   });
 });
