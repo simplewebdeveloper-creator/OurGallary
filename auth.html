@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { brand: { 500: '#5b7cff', 600: '#4367ff' } },
+            fontFamily: { sans: ['Inter', 'sans-serif'] }
+          }
+        }
+      };
+    </script>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="min-h-full bg-[radial-gradient(circle_at_top_left,_rgba(236,72,153,0.18),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(14,165,233,0.14),_transparent_22%),linear-gradient(135deg,_#050816_0%,_#081029_45%,_#111827_100%)] text-slate-100">
+    <div class="mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
+      <main class="flex flex-1 items-center justify-center py-10">
+        <div class="grid w-full max-w-6xl gap-8 rounded-[2rem] border border-white/10 bg-white/10 p-4 shadow-2xl shadow-slate-950/40 glass lg:grid-cols-[0.95fr_1.05fr] lg:p-8">
+          <section class="rounded-[1.6rem] border border-white/10 bg-slate-950/70 p-8">
+            <p class="text-sm uppercase tracking-[0.35em] text-brand-200">Secure access</p>
+            <h1 class="mt-4 text-4xl font-semibold text-white">Sign-in to access .</h1>
+            <p class="mt-4 text-sm leading-7 text-slate-400">Login, register, reset access, or connect your Google account with real-time validation and premium feedback.</p>
+          </section>
+
+          <section class="rounded-[1.6rem] border border-white/10 bg-slate-950/70 p-6 sm:p-8">
+            <div class="flex gap-2 rounded-full border border-white/10 bg-white/5 p-1">
+              <button data-mode="login" class="mode-btn flex-1 rounded-full bg-white/15 px-4 py-2 text-sm font-medium text-white">Login</button>
+              <button data-mode="register" class="mode-btn flex-1 rounded-full px-4 py-2 text-sm font-medium text-slate-300">Register</button>
+              <button data-mode="forgot" class="mode-btn flex-1 rounded-full px-4 py-2 text-sm font-medium text-slate-300">Reset</button>
+            </div>
+
+            <form id="authForm" class="mt-6 space-y-4" novalidate>
+              <div id="nameGroup" class="hidden">
+                <label class="mb-2 block text-sm text-slate-300" for="name">Full name</label>
+                <input id="name" name="name" class="w-full rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm text-white outline-none ring-0 transition focus:border-brand-500" placeholder="" />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm text-slate-300" for="email">Email</label>
+                <input id="email" name="email" type="email" class="w-full rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" placeholder="" required />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm text-slate-300" for="password">Password</label>
+                <input id="password" name="password" type="password" class="w-full rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" placeholder="Password" required />
+              </div>
+              <div id="confirmGroup" class="hidden">
+                <label class="mb-2 block text-sm text-slate-300" for="confirmPassword">Confirm password</label>
+                <input id="confirmPassword" name="confirmPassword" type="password" class="w-full rounded-2xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" placeholder="Confirm password" />
+              </div>
+              <button type="submit" class="w-full rounded-2xl bg-gradient-to-r from-brand-600 to-cyan-400 px-4 py-3 text-sm font-semibold text-white transition hover:scale-[1.01]">Continue</button>
+            </form>
+            <p id="formMessage" class="mt-4 text-sm text-slate-400"></p>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

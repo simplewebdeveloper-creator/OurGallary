@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard • Atelier Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { brand: { 500: '#5b7cff', 600: '#4367ff' } },
+            fontFamily: { sans: ['Inter', 'sans-serif'] }
+          }
+        }
+      };
+    </script>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="min-h-full bg-slate-950 text-slate-100">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <header class="flex flex-wrap items-center justify-between gap-4 rounded-full border border-white/10 bg-slate-900/80 px-4 py-3 glass">
+        <div class="flex items-center gap-3 text-sm font-semibold text-white">Atelier Gallery</div>
+        <nav class="hidden items-center gap-6 text-sm text-slate-300 md:flex">
+          <a href="#gallery" class="transition hover:text-white">Gallery</a>
+          <a href="#upload" class="transition hover:text-white">Upload</a>
+          <a href="#settings" class="transition hover:text-white">Settings</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <button id="logoutBtn" class="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20">Logout</button>
+        </div>
+      </header>
+
+      <main class="mt-8 grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
+        <section class="space-y-6">
+          <div class="rounded-[2rem] border border-white/10 bg-gradient-to-br from-slate-900/90 via-slate-900/70 to-slate-800/80 p-6 glass">
+            <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p class="text-sm uppercase tracking-[0.35em] text-brand-200">Studio dashboard</p>
+                <h1 class="mt-2 text-3xl font-semibold text-white">Welcome back, <span id="profileName">Alicia</span>.</h1>
+                <p class="mt-3 max-w-2xl text-sm leading-7 text-slate-400">Curate, search, and manage your visual collection with a premium gallery workflow.</p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-slate-300">
+                <div class="font-semibold text-white">12 active collections</div>
+                <div class="mt-1 text-xs text-slate-400">Hosted securely and ready to share</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="gallery" class="rounded-[2rem] border border-white/10 bg-slate-900/70 p-6 glass">
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <p class="text-sm font-medium uppercase tracking-[0.3em] text-brand-200">Gallery</p>
+                <h2 class="mt-2 text-2xl font-semibold text-white">Search and organize your collection</h2>
+              </div>
+              <div class="flex flex-col gap-3 sm:flex-row">
+                <input id="searchInput" type="search" placeholder="Search by name or tag" class="rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" />
+                <select id="filterSelect" class="rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none">
+                  <option value="all">All categories</option>
+                  <option value="Editorial">Editorial</option>
+                  <option value="Travel">Travel</option>
+                  <option value="Portraits">Portraits</option>
+                </select>
+                <select id="sortSelect" class="rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none">
+                  <option value="newest">Newest first</option>
+                  <option value="oldest">Oldest first</option>
+                  <option value="name">Name</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="galleryGrid" class="mt-6 grid gap-4 md:grid-cols-2"></div>
+            <div id="emptyState" class="mt-6 hidden rounded-2xl border border-dashed border-white/10 bg-white/5 p-6 text-center text-sm text-slate-400">No images match your filters yet. Try uploading a new asset.</div>
+            <div class="mt-6 flex flex-wrap items-center justify-between gap-3">
+              <div id="pageInfo" class="text-sm text-slate-400">Showing 0 entries</div>
+              <div id="pagination" class="flex gap-2"></div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="space-y-6">
+          <section id="upload" class="rounded-[2rem] border border-white/10 bg-slate-900/70 p-6 glass">
+            <p class="text-sm font-medium uppercase tracking-[0.3em] text-brand-200">Upload</p>
+            <h3 class="mt-2 text-xl font-semibold text-white">Drag and drop new media</h3>
+            <div id="dropArea" class="mt-4 rounded-[1.5rem] border border-dashed border-white/10 bg-white/5 p-6 text-center transition">
+              <p class="text-sm text-slate-300">Drop a JPG, PNG, or WebP file here</p>
+              <label class="mt-4 inline-flex cursor-pointer rounded-full bg-gradient-to-r from-brand-600 to-cyan-400 px-4 py-2 text-sm font-semibold text-white" for="fileInput">Choose file</label>
+              <input id="fileInput" type="file" accept="image/*" class="hidden" />
+              <div id="previewWrap" class="mt-4 hidden rounded-2xl border border-white/10 bg-slate-950/60 p-3 text-left">
+                <img id="previewImage" class="h-40 w-full rounded-2xl object-cover" alt="Preview" />
+                <div class="mt-3 flex items-center justify-between gap-3 text-sm text-slate-300">
+                  <span id="fileName">filename</span>
+                  <span id="fileSize">0 KB</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <label class="mb-2 block text-sm text-slate-300" for="categoryInput">Category</label>
+              <input id="categoryInput" class="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" placeholder="Editorial" />
+            </div>
+            <div class="mt-4">
+              <label class="mb-2 block text-sm text-slate-300" for="descriptionInput">Short note</label>
+              <input id="descriptionInput" class="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" placeholder="Behind the scenes" />
+            </div>
+            <div class="mt-4 h-2 rounded-full bg-white/10">
+              <div id="uploadProgress" class="h-2 w-0 rounded-full bg-gradient-to-r from-brand-600 to-cyan-400 transition-all"></div>
+            </div>
+            <button id="uploadBtn" class="mt-4 w-full rounded-2xl bg-gradient-to-r from-brand-600 to-cyan-400 px-4 py-3 text-sm font-semibold text-white transition hover:scale-[1.01]">Upload to gallery</button>
+          </section>
+
+          <section class="rounded-[2rem] border border-white/10 bg-slate-900/70 p-6 glass">
+            <p class="text-sm font-medium uppercase tracking-[0.3em] text-brand-200">Notifications</p>
+            <div id="notifications" class="mt-4 space-y-3 text-sm text-slate-300"></div>
+          </section>
+
+          <section id="settings" class="rounded-[2rem] border border-white/10 bg-slate-900/70 p-6 glass">
+            <p class="text-sm font-medium uppercase tracking-[0.3em] text-brand-200">Profile settings</p>
+            <div class="mt-4 space-y-4">
+              <div>
+                <label class="mb-2 block text-sm text-slate-300" for="profileDisplayName">Display name</label>
+                <input id="profileDisplayName" class="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" />
+              </div>
+              <div>
+                <label class="mb-2 block text-sm text-slate-300" for="profileBio">Bio</label>
+                <textarea id="profileBio" rows="3" class="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" placeholder="Visual storyteller"></textarea>
+              </div>
+              <button id="saveProfileBtn" class="w-full rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm font-medium text-white transition hover:bg-white/20">Save profile</button>
+            </div>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

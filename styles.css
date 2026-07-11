@@ -1,0 +1,36 @@
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.light-theme {
+  color: #111827;
+}
+
+
+.glass {
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 45px rgba(15, 23, 42, 0.24);
+}
+
+#dropArea.drag-active {
+  border-color: rgba(91, 124, 255, 0.9);
+  background: rgba(91, 124, 255, 0.12);
+}
+
+.error-text {
+  color: #fda4af;
+}

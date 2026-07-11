@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard • Atelier Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { brand: { 500: '#5b7cff', 600: '#4367ff' } },
+            fontFamily: { sans: ['Inter', 'sans-serif'] }
+          }
+        }
+      };
+    </script>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="min-h-full bg-slate-950 text-slate-100">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <header class="flex flex-wrap items-center justify-between gap-4 rounded-full border border-white/10 bg-slate-900/80 px-4 py-3 glass">
+        <div class="flex items-center gap-3 text-sm font-semibold text-white">
+          <span class="flex h-9 w-9 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-500 to-rose-500 font-bold">A</span>
+          Admin Control Center
+        </div>
+        <div class="flex items-center gap-3">
+          <button id="adminLogoutBtn" class="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20">Logout</button>
+        </div>
+      </header>
+
+      <main class="mt-8 space-y-6">
+        <section class="rounded-[2rem] border border-white/10 bg-gradient-to-br from-slate-900/90 via-slate-900/70 to-slate-800/80 p-6 glass">
+          <p class="text-sm uppercase tracking-[0.35em] text-amber-200">Admin dashboard</p>
+          <h1 class="mt-2 text-3xl font-semibold text-white">Monitor, publish, and manage the gallery.</h1>
+          <p class="mt-3 max-w-2xl text-sm leading-7 text-slate-400">Add new media, remove outdated uploads, and keep the user gallery in sync.</p>
+        </section>
+
+        <section class="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+          <div class="rounded-[2rem] border border-white/10 bg-slate-900/70 p-6 glass">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p class="text-sm font-medium uppercase tracking-[0.3em] text-brand-200">Managed gallery</p>
+                <h2 class="mt-2 text-2xl font-semibold text-white">Current gallery items</h2>
+              </div>
+              <button id="refreshGalleryBtn" class="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-white transition hover:bg-white/20">Refresh</button>
+            </div>
+            <div id="adminGalleryGrid" class="mt-6 grid gap-4 md:grid-cols-2"></div>
+          </div>
+
+          <div class="space-y-6">
+            <section class="rounded-[2rem] border border-white/10 bg-slate-900/70 p-6 glass">
+              <p class="text-sm font-medium uppercase tracking-[0.3em] text-brand-200">Upload media</p>
+              <h3 class="mt-2 text-xl font-semibold text-white">Add a new photo or video</h3>
+              <div class="mt-4">
+                <label class="mb-2 block text-sm text-slate-300" for="adminTitle">Title</label>
+                <input id="adminTitle" class="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" placeholder="New campaign shot" />
+              </div>
+              <div class="mt-4">
+                <label class="mb-2 block text-sm text-slate-300" for="adminType">Media type</label>
+                <select id="adminType" class="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none">
+                  <option value="image">Photo</option>
+                  <option value="video">Video</option>
+                </select>
+              </div>
+              <div class="mt-4">
+                <label class="mb-2 block text-sm text-slate-300" for="adminFile">Choose photo or video from device</label>
+                <input id="adminFile" type="file" accept="image/*,video/*" class="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white file:mr-3 file:rounded-full file:border-0 file:bg-brand-600 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-white" />
+              </div>
+              <div class="mt-4">
+                <label class="mb-2 block text-sm text-slate-300" for="adminDescription">Description</label>
+                <input id="adminDescription" class="w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-500" placeholder="Shared with all users" />
+              </div>
+              <button id="adminUploadBtn" class="mt-4 w-full rounded-2xl bg-gradient-to-r from-brand-600 to-cyan-400 px-4 py-3 text-sm font-semibold text-white transition hover:scale-[1.01]">Publish to user gallery</button>
+            </section>
+
+            <section class="rounded-[2rem] border border-white/10 bg-slate-900/70 p-6 glass">
+              <p class="text-sm font-medium uppercase tracking-[0.3em] text-brand-200">Live status</p>
+              <div id="adminStatus" class="mt-4 text-sm text-slate-400"></div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

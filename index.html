@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A premium gallery experience with secure auth, elegant gallery browsing, and effortless uploads." />
+    <meta name="theme-color" content="#060816" />
+    <title>Our Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: '#f2f6ff',
+                100: '#dfeaff',
+                500: '#5b7cff',
+                600: '#4367ff',
+                700: '#2f4dd6'
+              },
+              slate: {
+                950: '#060816'
+              }
+            },
+            boxShadow: {
+              glow: '0 15px 60px rgba(91, 124, 255, 0.25)'
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif']
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .glass {
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+      }
+      .fade-in {
+        animation: fadeIn 0.7s ease both;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-[radial-gradient(circle_at_top_left,_rgba(139,92,246,0.24),_transparent_25%),radial-gradient(circle_at_bottom_right,_rgba(59,130,246,0.18),_transparent_20%),linear-gradient(135deg,_#050816_0%,_#081029_50%,_#121a34_100%)] text-slate-100 antialiased">
+    <div class="relative overflow-hidden">
+      <header class="sticky top-0 z-40 border-b border-white/10 bg-slate-950/70 glass">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+          <a href="#" class="flex items-center gap-3 text-lg font-semibold tracking-wide text-white">
+            <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-cyan-400 text-base font-bold">❤️</span>
+            Our Gallery
+          </a>
+          <nav class="hidden items-center gap-7 text-sm text-slate-300 md:flex">
+            <a href="#features" class="transition hover:text-white">Features</a>
+            <a href="auth.html?mode=login" class="transition hover:text-white">Sign In</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="mx-auto flex max-w-7xl flex-col px-6 py-16 lg:px-8 lg:py-24">
+        <section class="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+          <div class="fade-in">
+            <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-3 py-1 text-sm text-brand-100">
+              <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+              Our Memories won't disappear.
+            </div>
+            <h1 class="max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
+              Go back in the past, think, and and remember the time spending our time and creating memorable memories.
+            </h1>
+            <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+              Just sit, and scroll down all memories we created.
+            </p>
+            <div class="mt-10 flex flex-wrap gap-4">
+              <a href="auth.html?mode=login" class="rounded-full bg-gradient-to-r from-brand-600 to-cyan-400 px-6 py-3 font-medium text-white shadow-glow transition hover:scale-[1.02]">User sign in</a>
+              <a href="admin-login.html" class="rounded-full border border-amber-400/30 bg-amber-500/10 px-6 py-3 font-medium text-amber-200 transition hover:bg-amber-500/20">Admin portal</a>
+            </div>
+          </div>
+
+          <div class="fade-in rounded-[2rem] border border-white/10 bg-white/10 p-4 shadow-2xl shadow-slate-950/40 glass">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="rounded-[1.5rem] border border-white/10 bg-slate-900/70 p-4">
+                <div class="mb-4 h-40 rounded-[1.2rem] bg-[url('https://images.pexels.com/photos/417211/pexels-photo-417211.jpeg?cs=srgb&dl=beach-clouds-coast-417211.jpg&fm=jpg')] bg-cover bg-center"></div>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-sm font-semibold text-white">Beautiful</p>
+                    <p class="text-xs text-slate-400"></p>
+                  </div>
+                  <span class="rounded-full bg-emerald-500/15 px-3 py-1 text-xs text-emerald-300"></span>
+                </div>
+              </div>
+              <div class="space-y-4">
+                <div class="rounded-[1.5rem] border border-white/10 bg-slate-900/70 p-4">
+                  <div class="mb-3 h-20 rounded-[1rem] bg-[url('https://wallpapers.com/images/hd/cute-innocent-cartoon-couple-17r36amtqnvz73px.jpg')] bg-cover bg-center"></div>
+                  <p class="text-sm font-semibold text-white">Sweet</p>
+                </div>
+                <div class="rounded-[1.5rem] border border-white/10 bg-slate-900/70 p-4">
+                  <div class="mb-3 h-20 rounded-[1rem] bg-[url('https://tse4.mm.bing.net/th/id/OIP.GQlFgHFWAV4folms881wAAHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3')] bg-cover bg-center"></div>
+                  <p class="text-sm font-semibold text-white">Funny</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="features" class="mt-24 grid gap-6 md:grid-cols-3">
+          <article class="rounded-[1.75rem] border border-white/10 bg-white/10 p-6 glass">
+            <h3 class="text-xl font-semibold text-white"> You Make Me Feel Cherished</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-400">You have a way of making me feel like I’m the most important person in the world. Your care, attention, and thoughtfulness whether through small gestures, kind words, or simply being present remind me daily that I am loved and valued, creating a deep sense of emotional security and connection.</p>
+          </article>
+          <article class="rounded-[1.75rem] border border-white/10 bg-white/10 p-6 glass">
+            <h3 class="text-xl font-semibold text-white"> You Inspire Me to Be My Best</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-400">Being with you motivates me to grow and improve. Your support, encouragement, and belief in my abilities push me to pursue my goals and face challenges with confidence. You challenge me with love and compassion, helping me become a better version of myself .</p>
+          </article>
+          <article class="rounded-[1.75rem] border border-white/10 bg-white/10 p-6 glass">
+            <h3 class="text-xl font-semibold text-white">You Bring Joy and Warmth</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-400">Your presence lights up my life. From your laughter and optimism to the way you care for others and share your curiosity, you make ordinary moments feel extraordinary. You turn everyday experiences into memories filled with happiness, comfort, and love .</p>
+          </article>
+        </section>
+
+        <section id="auth" class="mt-24 grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+          <div class="rounded-[2rem] border border-white/10 bg-white/10 p-8 glass">
+            <p class="text-sm font-medium uppercase tracking-[0.3em] text-brand-200">Authentication</p>
+            <h2 class="mt-3 text-3xl font-semibold text-white">Designed for security.</h2>
+            <p class="mt-4 text-slate-400">Login, register, restore access, or sign in with Google.</p>
+          </div>
+          <div class="rounded-[2rem] border border-white/10 bg-slate-950/70 p-8 glass">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <a href="auth.html?mode=login" class="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-center text-sm text-white transition hover:bg-white/20">User Login</a>
+              <a href="auth.html?mode=register" class="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-center text-sm text-white transition hover:bg-white/20">User Register</a>
+              <a href="auth.html?mode=forgot" class="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-center text-sm text-white transition hover:bg-white/20">Forgot Password</a>
+              <a href="admin-login.html" class="rounded-2xl border border-amber-400/30 bg-amber-500/10 px-4 py-3 text-center text-sm text-amber-200 transition hover:bg-amber-500/20">Admin Login</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
